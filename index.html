@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Pokemon Api </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <main class="wrapper">
+      <div class="welcome">
+        <h1>Original 150 Pokemon</h1>
+        <div class="filter">
+          
+          <label for="pokeName">Search Pokemon:</label>
+          <input onkeyup=updateSearch(value) name="pokeName" type="text">
+          
+       
+        </div>
+      </div>
+      
+      <div id="app" class="pokemon">
+
+      </div>
+    </main>
+    
+    <script src="./app.js" async defer></script>
+  </body>
+</html>
