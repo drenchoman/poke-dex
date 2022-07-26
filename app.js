@@ -17,8 +17,13 @@ getPokemon()
 
 function addPokemon(pokemons) {
   app.textContent = ''
+  let header = createDiv('poke-header', 'Select your Pokemon')
+  let grid = createDiv('poke-grid')
+  app.appendChild(header)
   pokemons.forEach((pokemon) => {
-    addCard(pokemon)
+    let gridItem = addCard(pokemon)
+    grid.appendChild(gridItem)
+    app.appendChild(grid)
   })
 }
 
@@ -35,7 +40,8 @@ function addCard(pokemon) {
 
   imageWrapper.appendChild(imageDiv)
   div.appendChild(imageWrapper)
-  app.appendChild(div)
+
+  return div
 }
 
 async function getPokemonImage(allPokemon) {
@@ -124,8 +130,19 @@ function addIndividualPokemonCard(pokemon) {
   let rightSide = createDiv('individual-right-side')
   let bottom = createDiv('individual-bottom', 'Back')
   let imageDiv = createImage(pokemon.image, pokemon.name)
-  let abilitiesList = createList('Abilities:', pokemon.abilities, 'ability')
-  let typesList = createList('Types:', pokemon.types, 'type')
+  let abilitiesList = createList(
+    'Abilities:',
+    pokemon.abilities,
+    'ability',
+    pokemon.abilities.length
+  )
+  let typesList = createList(
+    'Types:',
+    pokemon.types,
+    'type',
+    pokemon.types.length
+  )
+  let movesList = createList('Moves', pokemon.moves, 'move', 5)
   let heightDiv = createDiv('poke-height', 'Height')
   let height = createStat(pokemon.height, 'foot')
   let weightDiv = createDiv('poke-weight', 'Weight')
@@ -135,13 +152,8 @@ function addIndividualPokemonCard(pokemon) {
   weightDiv.appendChild(weight)
   imageWrapper.appendChild(imageDiv)
   leftSide.appendChild(imageWrapper)
-  rightSide.appendChild(abilitiesList)
-  rightSide.appendChild(typesList)
-  rightSide.appendChild(heightDiv)
-  rightSide.appendChild(weightDiv)
-  div.appendChild(leftSide)
-  div.appendChild(rightSide)
-  div.appendChild(bottom)
+  rightSide.append(abilitiesList, typesList, movesList, heightDiv, weightDiv)
+  div.append(leftSide, rightSide, bottom)
   app.appendChild(div)
   addBackListener()
 }
@@ -173,12 +185,12 @@ function createDiv(classList, header, child) {
   return div
 }
 
-function createList(header, listContent, type) {
+function createList(header, listContent, type, length) {
   let listWrapper = document.createElement('div')
   let list = document.createElement('ul')
   let listHeader = document.createElement('h3')
   listHeader.textContent = `${header}`
-  for (let i = 0; i < listContent.length; i++) {
+  for (let i = 0; i < length; i++) {
     let listItem = document.createElement('li')
     listItem.textContent = capitaliseString(listContent[i][type].name)
     list.appendChild(listItem)
@@ -199,4 +211,11 @@ function createStat(string, stat) {
   let comboString = document.createElement('p')
   comboString.textContent = `${string} ${stat}`
   return comboString
+}
+
+function movebox() {
+  console.log('working')
+  let grid = document.querySelector('.poke-grid')
+  console.log(grid)
+  grid.scrollLeft += 50
 }

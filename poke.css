@@ -1,0 +1,354 @@
+:root{
+  --body-color: #f9e42f;
+  --body-shade: #fee843;
+  --logo-text: #c0c0c0;
+  --button-color: #020202;
+  --border-radius-sm: 15px;
+  --border-radius-lg: 75px;
+  --margin-md: 1rem;
+  --padding-md: 1rem;
+}
+
+*{
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-md);
+  align-items: center;
+}
+
+.body{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 650px;
+  width: 100%;
+  max-width: 414px;
+  padding: var(--padding-md);
+  background-color: var(--body-color);
+  border-top-left-radius: var(--border-radius-sm);
+  border-top-right-radius: var(--border-radius-sm);
+  border-bottom-left-radius: var(--border-radius-lg);
+  border-bottom-right-radius: var(--border-radius-lg);
+  /* position: relative; */
+  justify-content: center;
+  align-items: center;
+}
+
+.screen{
+  background-color: darkgray;
+  /* position: absolute; */
+  height: 100%;
+  max-height: 300px;
+  max-width: 350px;
+  width: 100%;
+  z-index: 2;
+  margin: var(--margin-md);
+  border: 45px solid black;
+  border-top: 35px solid black;
+  border-radius: var(--border-radius-sm);
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  
+}
+#app{
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  height: inherit;
+  overflow: hidden;
+}
+
+.poke-grid{
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.poke-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  
+  font-family: 'Roboto', sans-serif;
+  border-radius: 20px;
+  margin: 0 1rem;
+  padding: 0 1rem;
+}
+
+.poke-image-wrapper > img {
+  width: 75px;
+  height: 75px;
+}
+
+.poke-image-wrapper > img:hover{
+  transform: scale(1.15);
+  cursor: pointer;
+  transition: 0.4ms ease-in-out;
+}
+
+
+.logo{
+  position: absolute;
+  bottom: -2rem;
+  color: var(--logo-text);
+  left: 3.2em;
+  width: 100%;
+  font-family: 'Comfortaa', cursive;
+}
+
+.logo-red{
+  color: #fe0054;
+  font-family: 'Mochiy Pop One', sans-serif;
+}
+
+.logo-purple{
+  color: #7947b4;
+  font-family: 'Mochiy Pop One', sans-serif;
+}
+
+.logo-green{
+  color: #ace501;
+  font-family: 'Mochiy Pop One', sans-serif;
+}
+
+.logo-yellow{
+  color: #fbef1b;
+  font-family: 'Mochiy Pop One', sans-serif;
+}
+
+.logo-blue{
+  color: #02b7f0;
+  font-family: 'Mochiy Pop One', sans-serif;
+}
+
+.power-div{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: -2.4rem;
+  top: 2rem;
+}
+
+.power-circle{
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: red;
+  border: 1px solid black;
+  margin: 0.2rem 0;
+}
+
+.power-text{
+  color: var(--logo-text);
+  font-size: 0.6rem;
+}
+
+.buttons{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  position: relative;
+}
+/* Adds shade */
+.buttons::after{
+  content: "";
+  background-color: var(--body-shade);
+  z-index: 0;
+  width: 85%;
+  height:100%;
+  position:absolute;
+  top: -1rem;
+  overflow: hidden;
+  left: 1.5rem;
+  border-bottom-left-radius: var(--border-radius-lg);
+  border-bottom-right-radius: var(--border-radius-lg);
+}
+
+.topButtons{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+.leftButtons{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.rightButtons{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.button{
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  border-radius: 100%;
+  margin: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aButton{
+  position: relative;
+  bottom: 1.8rem;
+}
+
+.directional{
+  display: grid;
+  grid-template-areas: ".     top       ."
+                       "left  middle right"
+                       ".     bottom         .";
+grid-template-columns: 1fr 1fr 1fr;
+grid-template-rows: 1fr 1fr 1fr;
+width: 100%;
+max-width: 110px;
+height: 100%;
+max-height: 105px;
+bottom: 1rem;
+position: relative;
+
+}
+
+.direction{
+  background-color: var(--button-color);
+  
+}
+
+.direction-top{
+  grid-area: top;
+  background-image: url("./assets/top.svg");
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.direction-bottom{
+  grid-area: bottom;
+  background-image: url("./assets/down.svg");
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.direction-middle{
+  grid-area: middle;
+  background-image: url("./assets/circle.svg");
+  background-color: var(--button-color);
+  border: 1px solid var(--button-color);
+}
+
+.direction-left{
+  grid-area: left;
+  background-image: url("./assets/left.svg");
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.direction-right{
+  grid-area: right;
+  background-image: url("./assets/right.svg");
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.filter{
+  filter: invert(75%) sepia(1%) saturate(0%) hue-rotate(155deg) brightness(20%) contrast(88%);
+
+}
+
+.filterLetter{
+  color: #a9a9a9;
+  filter:brightness(80%)
+}
+
+.bottomButtons{
+  display: flex;
+  height: 60%;
+  width: 100%;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+}
+
+
+
+.select-buttons{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+
+}
+
+.select{
+  height: 10px;
+  width: 35px;
+  background-color: var(--button-color);
+  margin: var(--margin-md);
+  border-radius: 5px;
+}
+
+.dots-grid{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 75px;
+  position: absolute;
+  right: 0;
+  bottom: 1.5rem;
+  transform: rotate(-2deg);
+}
+
+.dots{
+  width: 5px;
+  height: 5px;
+  margin: 0.1rem;
+  padding: 0.1rem;
+  border-radius: 100%;
+  background-color: var(--button-color);
+  
+  
+}
+
+.invis{
+  visibility: hidden;
+}
+
+@media screen and (max-width: 390px){
+  .logo{
+    left: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 375px){
+  .logo{
+    left: 2rem;
+  }
+}
+
+
+/* TODO: MEDIA QUERIES GAMEBOY COLOR CENTERED ON SMALLER SCREEN */
