@@ -1,14 +1,27 @@
 let allPokemon = {}
 let app = document.getElementById('app')
 let searchTerm = ''
+let aSelect = document.getElementById('aSelect')
+let pokemonIndex = 0
+let bSelect = document.getElementById('bSelect')
+let bottomArrow = document.getElementById('direction-bottom')
+let topArrow = document.getElementById('direction-top')
+
+aSelect.addEventListener('click', getValueAndCallPokemon)
+bSelect.addEventListener('click', goBack)
+bottomArrow.addEventListener('click', function () {
+  moveBox('bottom')
+})
+topArrow.addEventListener('click', function () {
+  moveBox('top')
+})
 
 async function getPokemon() {
   let res = await fetch('https://pokeapi.co/api/v2/generation/generation-i')
   let pokemon = await res.json()
   let species = await pokemon.pokemon_species
-  console.log(species)
-  allPokemon = await species
 
+  allPokemon = await species
   //get images
   await getPokemonImage(allPokemon)
   addPokemon(allPokemon)
@@ -17,7 +30,7 @@ getPokemon()
 
 function addPokemon(pokemons) {
   app.textContent = ''
-  let header = createDiv('poke-header', 'Select your Pokemon')
+  let header = createDiv('poke-header', 'Pick your Pokemon', 'initial-header')
   let grid = createDiv('poke-grid')
   app.appendChild(header)
   pokemons.forEach((pokemon) => {
@@ -32,12 +45,9 @@ function capitaliseString(string) {
 }
 
 function addCard(pokemon) {
-  let div = createDiv('poke-card', pokemon.name)
+  let div = createDiv('poke-card', pokemon.name, 'poke-header')
   let imageWrapper = createDiv('poke-image-wrapper')
   let imageDiv = createImage(pokemon.image, pokemon.name)
-
-  imageDiv.addEventListener('click', getValueAndCall, false)
-
   imageWrapper.appendChild(imageDiv)
   div.appendChild(imageWrapper)
 
@@ -67,14 +77,14 @@ function updateSearch(value) {
   filterByName(searchTerm)
 }
 
-function getValueAndCall(e) {
-  getPokemonStats(e.target.id)
+function getValueAndCallPokemon() {
+  let name = allPokemon[pokemonIndex].name
+  getPokemonStats(name)
 }
 
 async function getPokemonStats(name) {
   let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
   let pokemon = await res.json()
-  console.log(pokemon)
   let abilities = await pokemon.abilities
   let types = await pokemon.types
   let weight = await pokemon.weight
@@ -92,7 +102,6 @@ async function getPokemonStats(name) {
     moves,
     sprites
   )
-  console.log(updatedPokemon)
   showIndividualPokemon(updatedPokemon)
 }
 
@@ -106,15 +115,15 @@ function updatePokemon(
   moves,
   sprites
 ) {
-  let pokemonIndex = allPokemon.findIndex((pokemon) => pokemon.name == name)
-  allPokemon[pokemonIndex].abilities = abilities
-  allPokemon[pokemonIndex].types = types
-  allPokemon[pokemonIndex].weight = weight
-  allPokemon[pokemonIndex].height = height
-  allPokemon[pokemonIndex].stats = stats
-  allPokemon[pokemonIndex].moves = moves
-  allPokemon[pokemonIndex].sprites = sprites
-  return allPokemon[pokemonIndex]
+  let index = allPokemon.findIndex((pokemon) => pokemon.name == name)
+  allPokemon[index].abilities = abilities
+  allPokemon[index].types = types
+  allPokemon[index].weight = weight
+  allPokemon[index].height = height
+  allPokemon[index].stats = stats
+  allPokemon[index].moves = moves
+  allPokemon[index].sprites = sprites
+  return allPokemon[index]
 }
 
 function showIndividualPokemon(pokemon) {
@@ -126,9 +135,9 @@ function addIndividualPokemonCard(pokemon) {
   app.classList.add('individual-pokemon')
   let div = createDiv('individual-poke-card')
   let imageWrapper = createDiv('poke-image-wrapper')
-  let leftSide = createDiv('individual-left-side', pokemon.name)
+  let leftSide = createDiv('individual-left-side', pokemon.name, 'poke-header')
   let rightSide = createDiv('individual-right-side')
-  let bottom = createDiv('individual-bottom', 'Back')
+
   let imageDiv = createImage(pokemon.image, pokemon.name)
   let abilitiesList = createList(
     'Abilities:',
@@ -143,9 +152,9 @@ function addIndividualPokemonCard(pokemon) {
     pokemon.types.length
   )
   let movesList = createList('Moves', pokemon.moves, 'move', 5)
-  let heightDiv = createDiv('poke-height', 'Height')
+  let heightDiv = createDiv('poke-height', 'Height', 'smallHeader')
   let height = createStat(pokemon.height, 'foot')
-  let weightDiv = createDiv('poke-weight', 'Weight')
+  let weightDiv = createDiv('poke-weight', 'Weight', 'smallHeader')
   let weight = createStat(pokemon.weight, 'kgs')
 
   heightDiv.appendChild(height)
@@ -153,17 +162,14 @@ function addIndividualPokemonCard(pokemon) {
   imageWrapper.appendChild(imageDiv)
   leftSide.appendChild(imageWrapper)
   rightSide.append(abilitiesList, typesList, movesList, heightDiv, weightDiv)
-  div.append(leftSide, rightSide, bottom)
+  div.append(leftSide, rightSide)
   app.appendChild(div)
-  addBackListener()
 }
 
-function addBackListener() {
-  let back = document.getElementsByClassName('individual-bottom')
-  back[0].addEventListener('click', function () {
-    addPokemon(allPokemon)
-    app.classList.remove('individual-pokemon')
-  })
+function goBack() {
+  addPokemon(allPokemon)
+  app.classList.remove('individual-pokemon')
+  resetBox(pokemonIndex)
 }
 
 function createImage(src, id) {
@@ -173,12 +179,12 @@ function createImage(src, id) {
   return imageDiv
 }
 
-function createDiv(classList, header, child) {
+function createDiv(classList, header, headerClassName) {
   let div = document.createElement('div')
   div.classList = classList
 
   if (header) {
-    let title = createHeader(header)
+    let title = createHeader(header, headerClassName)
     div.appendChild(title)
   }
 
@@ -204,6 +210,7 @@ function createHeader(string, className) {
   let header = document.createElement('h2')
   let capString = capitaliseString(string)
   header.textContent = capString
+  header.classList.add(className)
   return header
 }
 
@@ -213,9 +220,49 @@ function createStat(string, stat) {
   return comboString
 }
 
-function movebox() {
-  console.log('working')
+function moveBox(direction) {
+  if (direction === 'left') {
+    let grid = document.querySelector('.poke-grid')
+    grid.scrollLeft -= 232
+    updatePokemonIndex('dec')
+  }
+
+  if (direction === 'right') {
+    let grid = document.querySelector('.poke-grid')
+    grid.scrollLeft += 232
+    updatePokemonIndex('inc')
+  }
+
+  if (direction == 'top') {
+    let grid = document.getElementById('app')
+    grid.scrollTop -= 50
+  }
+
+  if (direction == 'bottom') {
+    let grid = document.getElementById('app')
+    grid.scrollTop += 50
+  }
+}
+
+function resetBox(index) {
   let grid = document.querySelector('.poke-grid')
-  console.log(grid)
-  grid.scrollLeft += 50
+  let scrollAmount = index * 232
+  grid.scrollLeft = scrollAmount
+}
+
+function updatePokemonIndex(symbol) {
+  if (symbol == 'inc') {
+    pokemonIndex++
+  }
+  if (symbol == 'dec') {
+    pokemonIndex--
+  }
+  if (pokemonIndex == -1) {
+    pokemonIndex = 150
+    resetBox(pokemonIndex)
+  }
+  if (pokemonIndex == 151) {
+    pokemonIndex = 0
+    resetBox(pokemonIndex)
+  }
 }

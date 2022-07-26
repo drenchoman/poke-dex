@@ -14,6 +14,27 @@
   box-sizing: border-box;
 }
 
+h2{
+  font-family: 'Roboto', sans-serif;
+  
+}
+
+h3{
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  font-family: 'Comfortaa', cursive;
+  text-decoration: underline;
+}
+
+li, p{
+  font-family: 'Comfortaa', cursive;
+}
+
+.poke-header{
+  padding: 0.5rem;
+  display: flex;
+}
+
 
 .wrapper{
   display: flex;
@@ -45,16 +66,14 @@
   /* position: absolute; */
   height: 100%;
   max-height: 300px;
-  max-width: 350px;
+  max-width: 320px;
   width: 100%;
-  z-index: 2;
   margin: var(--margin-md);
   border: 45px solid black;
   border-top: 35px solid black;
   border-radius: var(--border-radius-sm);
   position: relative;
   display: flex;
-  overflow: hidden;
   justify-content: center;
   align-items: center;
   
@@ -67,12 +86,18 @@
   overflow: hidden;
 }
 
+.initial-header{
+  font-size: 1rem;
+  font-family: 'Comfortaa', cursive;
+  margin: 0.5rem auto;
+}
+
 .poke-grid{
   display: flex;
   flex-direction: row;
-  padding: 1rem;
   position: relative;
   overflow: hidden;
+  padding: 0.5rem 0;
 }
 
 .poke-card{
@@ -82,16 +107,21 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  
+  min-width: 200px;
   font-family: 'Roboto', sans-serif;
   border-radius: 20px;
-  margin: 0 1rem;
-  padding: 0 1rem;
+  margin: 0.5rem 1rem;
+  
+}
+
+.poke-header{
+  font-family: 'Mochiy Pop One', sans-serif;
+  margin: 0;
 }
 
 .poke-image-wrapper > img {
-  width: 75px;
-  height: 75px;
+  width: 100px;
+  height: 100px;
 }
 
 .poke-image-wrapper > img:hover{
@@ -103,10 +133,11 @@
 
 .logo{
   position: absolute;
-  bottom: -2rem;
+  bottom: -2em;
   color: var(--logo-text);
-  left: 3.2em;
+  left: 2em;
   width: 100%;
+  z-index: 5;
   font-family: 'Comfortaa', cursive;
 }
 
@@ -150,6 +181,20 @@
   background-color: red;
   border: 1px solid black;
   margin: 0.2rem 0;
+  animation: glow infinite 3s;
+}
+
+@keyframes glow{
+  0%{
+    opacity: 1;
+
+  }
+  50%{
+    opacity: 0.7
+  }
+  100%{
+    opacity: 1;
+  }
 }
 
 .power-text{
@@ -239,14 +284,14 @@ position: relative;
   
 }
 
-.direction-top{
+#direction-top{
   grid-area: top;
   background-image: url("./assets/top.svg");
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
-.direction-bottom{
+#direction-bottom{
   grid-area: bottom;
   background-image: url("./assets/down.svg");
   border-bottom-left-radius: 5px;
@@ -260,14 +305,14 @@ position: relative;
   border: 1px solid var(--button-color);
 }
 
-.direction-left{
+#direction-left{
   grid-area: left;
   background-image: url("./assets/left.svg");
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
 
-.direction-right{
+#direction-right{
   grid-area: right;
   background-image: url("./assets/right.svg");
   border-bottom-right-radius: 5px;
@@ -330,13 +375,51 @@ position: relative;
   padding: 0.1rem;
   border-radius: 100%;
   background-color: var(--button-color);
-  
-  
 }
 
 .invis{
   visibility: hidden;
 }
+
+
+.individual-pokemon{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.individual-left-side{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.individual-left-side > h2{
+  padding: 0.5rem;
+}
+
+.individual-right-side{
+  display: flex;
+  width: 100%;
+  min-width: 230px;
+  padding: 0 1rem;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.individual-right-side > * {
+  margin: 0.5rem;
+}
+
+.smallHeader{
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  text-decoration: underline;
+  font-family: 'Comfortaa', cursive;
+}
+
 
 @media screen and (max-width: 390px){
   .logo{
@@ -351,4 +434,3 @@ position: relative;
 }
 
 
-/* TODO: MEDIA QUERIES GAMEBOY COLOR CENTERED ON SMALLER SCREEN */

@@ -6,26 +6,132 @@
     <title>Pokemon Api </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./poke.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  </head>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Mochiy+Pop+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">  </head>
   <body>
     <main class="wrapper">
-      <div class="welcome">
-        <h1>Original 150 Pokemon</h1>
-        <div class="filter">
+      <div class="body">
+        <div class="screen">
+          <div id="app">
+          </div>
+          <div class="power-div">
+            <div class="power-circle"></div>
+            <span class="power-text">POWER</span>
+          </div>
           
-          <label for="pokeName">Search Pokemon:</label>
-          <input onkeyup=updateSearch(value) name="pokeName" type="text">
-          
-       
+          <span class="logo"> GAME BOY <span class="logo-red">C</span><span class="logo-purple">O</span><span class="logo-green">L</span><span class="logo-yellow">O</span><span class="logo-blue">R</span></span>
         </div>
-      </div>
-      
-      <div id="app" class="pokemon">
-
+        <div class="buttons">
+          <div class="topButtons">
+            <div class="leftButtons">
+              <div class="directional">
+                <div id="direction-top" class="direction">
+                  <img class="filter" src="./assets/top.svg" alt="">
+                </div>
+                <div onclick="moveBox('right')" id="direction-right" class="direction">
+                  <img class="filter" src="./assets/right.svg" alt="">
+                </div>
+                <div class="direction-middle">
+                  <img class="filter" src="./assets/circle.svg" alt="">
+                </div>
+                <div id='direction-bottom' class="direction">
+                  <img class="filter" src="./assets/down.svg" alt="">
+                </div>
+                <div onclick="moveBox('left')" id="direction-left" class="direction">
+                  <img class="filter" src="./assets/left.svg" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="rightButtons">
+              <div id="bSelect" class="bButton button">
+                <p class="filterLetter">B</p>
+              </div>
+              <div id="aSelect" class="aButton button"><p class="filterLetter">A</p></div>
+            </div>
+        </div>
+        <div class="bottomButtons">
+          <div class="select-buttons">
+            <div class="left-select select"></div>
+            <div class="right-select select"></div>
+          </div>
+          <div class="dots-grid">
+            <div class="dots invis"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots invis"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots invis"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots"></div>
+            <div class="dots invis"></div>
+          </div>
+        </div>
+        </div>
       </div>
     </main>
     
