@@ -1,6 +1,17 @@
 :root{
-  --body-color: #f9e42f;
-  --body-shade: #fee843;
+  --body-0-color: #f9e42f;
+  --body-0-shade: #fee843;
+  --body-1-color:#a8e001;
+  --body-1-shade: #b6e002;
+  --body-2-color: #7949bf;
+  --body-2-shade: #7949bf;
+  --body-3-color: #01b4dd;
+  --body-3-shade: #03b6d4;
+  --body-4-color: #FFB4B4;
+  --body-4-shade: #FFbCbC;
+  --body-5-color: #ff0050;
+  --body-5-shade: #fa0b63;
+  --screen-color: #9e958e;
   --logo-text: #c0c0c0;
   --button-color: #020202;
   --border-radius-sm: 15px;
@@ -28,6 +39,12 @@ h3{
 
 li, p{
   font-family: 'Comfortaa', cursive;
+  list-style: none;
+
+}
+
+ul{
+  padding: 0;
 }
 
 .poke-header{
@@ -51,7 +68,7 @@ li, p{
   width: 100%;
   max-width: 414px;
   padding: var(--padding-md);
-  background-color: var(--body-color);
+  background-color: var(--body-0-color);
   border-top-left-radius: var(--border-radius-sm);
   border-top-right-radius: var(--border-radius-sm);
   border-bottom-left-radius: var(--border-radius-lg);
@@ -62,7 +79,8 @@ li, p{
 }
 
 .screen{
-  background-color: darkgray;
+  background-color: var(--screen-color);
+  background: url('./assets/noise.svg');
   /* position: absolute; */
   height: 100%;
   max-height: 300px;
@@ -76,6 +94,7 @@ li, p{
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
   
 }
 #app{
@@ -84,6 +103,17 @@ li, p{
   width: inherit;
   height: inherit;
   overflow: hidden;
+  
+}
+
+.loading{
+  margin: 5.5rem;
+  position: relative;
+}
+
+.spinner{
+  position: relative;
+  left: 0.8em;
 }
 
 .initial-header{
@@ -210,16 +240,15 @@ li, p{
   position: relative;
 }
 /* Adds shade */
-.buttons::after{
-  content: "";
-  background-color: var(--body-shade);
+.shade{
+  background-color: var(--body-0-shade);
   z-index: 0;
-  width: 85%;
+  width: 82%;
   height:100%;
   position:absolute;
-  top: -1rem;
+  top: -1.8rem;
   overflow: hidden;
-  left: 1.5rem;
+  left: 2.2rem;
   border-bottom-left-radius: var(--border-radius-lg);
   border-bottom-right-radius: var(--border-radius-lg);
 }
@@ -249,13 +278,32 @@ li, p{
 .button{
   width: 50px;
   height: 50px;
-  background-color: black;
+  background: black;
   color: white;
   border-radius: 100%;
   margin: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+
+ 
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+}
+
+.direction{
+  background-color: var(--button-color);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+}
+
+.button:hover{
+  cursor: pointer;
+
 }
 
 .aButton{
@@ -279,9 +327,10 @@ position: relative;
 
 }
 
-.direction{
-  background-color: var(--button-color);
-  
+
+
+.direction:hover{
+  cursor: pointer;
 }
 
 #direction-top{
@@ -298,7 +347,7 @@ position: relative;
   border-bottom-right-radius: 5px;
 }
 
-.direction-middle{
+#direction-middle{
   grid-area: middle;
   background-image: url("./assets/circle.svg");
   background-color: var(--button-color);
@@ -322,11 +371,30 @@ position: relative;
 .filter{
   filter: invert(75%) sepia(1%) saturate(0%) hue-rotate(155deg) brightness(20%) contrast(88%);
 
+  color: white;
+  transform: translateY(-3px);
 }
+
+.filter:active, .direction{
+  transform: translateY(-2px);
+}
+
+
 
 .filterLetter{
   color: #a9a9a9;
-  filter:brightness(80%)
+  filter:brightness(80%);
+  display: block;
+    padding: 8px 16px;
+    border-radius: 100%;
+    font-size: 1.25rem;
+    background: var(--button-color);
+    color: white;
+    transform: translateY(-5px);
+}
+
+.filterLetter:active, .button{
+  transform: translateY(-2px);
 }
 
 .bottomButtons{
@@ -345,7 +413,25 @@ position: relative;
   flex-direction: row;
   width: 100%;
   justify-content: center;
+  position: relative;
+  font-family: 'Comfortaa', cursive;
+  font-size: 0.6rem;
 
+}
+.select-span{
+  position: relative;
+  top: 1rem;
+  right: 0.1rem;
+}
+
+.start-span{
+  position: relative;
+  top: 1rem;
+  left: 0.2rem;
+}
+
+#start:hover{
+  cursor: pointer;
 }
 
 .select{
@@ -403,14 +489,21 @@ position: relative;
   display: flex;
   width: 100%;
   min-width: 230px;
-  padding: 0 1rem;
-  flex-direction: column;
-  justify-content: flex-start;
+  
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
   margin-bottom: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .individual-right-side > * {
-  margin: 0.5rem;
+  margin: 0.25rem;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .smallHeader{
@@ -420,6 +513,95 @@ position: relative;
   font-family: 'Comfortaa', cursive;
 }
 
+
+.start-wrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: "header header header"
+                       "option-1 option-2 option-3"
+                       "option-4 option-5 option-6";
+  width: inherit;
+  height: inherit;
+  padding: 0.5rem;
+
+}
+
+.start-header{
+  grid-area: header;
+  font-family: 'Comfortaa', cursive;
+  font-size: 1rem;
+  align-self: center;
+  justify-self: center;
+}
+
+#option-0{
+  grid-area: option-1;
+  filter: invert(93%) sepia(52%) saturate(988%) hue-rotate(339deg) brightness(101%) contrast(95%);
+}
+#option-1{
+  grid-area: option-2;
+  filter: invert(81%) sepia(15%) saturate(6007%) hue-rotate(26deg) brightness(103%) contrast(99%);
+}
+#option-2{
+  grid-area: option-3;
+  filter: invert(36%) sepia(41%) saturate(1340%) hue-rotate(229deg) brightness(88%) contrast(97%);
+}
+#option-3{
+  grid-area: option-4;
+  filter: invert(51%) sepia(43%) saturate(2589%) hue-rotate(155deg) brightness(99%) contrast(99%);
+
+}
+#option-4{
+  grid-area: option-5;
+  filter: invert(99%) sepia(44%) saturate(4780%) hue-rotate(290deg) brightness(102%) contrast(105%);
+}
+#option-5{
+  grid-area: option-6;
+  filter: invert(16%) sepia(90%) saturate(5676%) hue-rotate(334deg) brightness(96%) contrast(111%);
+
+}
+
+.theme-0-body{
+  background-color: var(--body-0-color);
+}
+.theme-0-shade{
+  background-color: var(--body-0-shade);
+}
+.theme-1-body{
+  background-color: var(--body-1-color);
+}
+.theme-1-shade{
+  background-color: var(--body-1-shade);
+}
+.theme-2-body{
+  background-color: var(--body-2-color);
+}
+.theme-2-shade{
+  background-color: var(--body-2-shade);
+}
+.theme-3-body{
+  background-color: var(--body-3-color);
+}
+.theme-3-shade{
+  background-color: var(--body-3-shade);
+}
+.theme-4-body{
+  background-color: var(--body-4-color);
+}
+.theme-4-shade{
+  background-color: var(--body-4-shade);
+}
+.theme-5-body{
+  background-color: var(--body-5-color);
+}
+.theme-5-shade{
+  background-color: var(--body-5-shade);
+}
+
+.selected{
+  border: 5px dashed yellow;
+}
 
 @media screen and (max-width: 390px){
   .logo{
