@@ -421,6 +421,14 @@ const listeners = (() => {
     document
       .getElementById('direction-left')
       .addEventListener('click', (e) => utilities.moveBox('direction-left'))
+
+    //TODO:  top and bottom mimick left and right till I think of something more interesting to do
+    document
+      .getElementById('direction-top')
+      .addEventListener('click', (e) => utilities.moveBox('direction-left'))
+    document
+      .getElementById('direction-bottom')
+      .addEventListener('click', (e) => utilities.moveBox('direction-right'))
     aSelect.addEventListener('click', utilities.getValueAndCallPokemon)
     bSelect.addEventListener('click', dom.goBack)
   }
@@ -433,6 +441,14 @@ const listeners = (() => {
     let left = document.getElementById('direction-left')
     leftClone = left.cloneNode(true)
     left.parentNode.replaceChild(leftClone, left)
+
+    let top = document.getElementById('direction-top')
+    topClone = top.cloneNode(true)
+    top.parentNode.replaceChild(topClone, top)
+
+    let bottom = document.getElementById('direction-bottom')
+    bottomClone = bottom.cloneNode(true)
+    bottom.parentNode.replaceChild(bottomClone, bottom)
 
     aSelect.removeEventListener('click', utilities.getValueAndCallPokemon)
   }
