@@ -532,6 +532,13 @@ position: relative;
   justify-content: center;
   align-items: center;
   padding: 0.5rem;
+  
+}
+
+.select-header{
+  font-family: 'Comfortaa', cursive;
+  padding: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .home-div{
