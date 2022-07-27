@@ -23,7 +23,7 @@
 *{
   margin: 0;
   box-sizing: border-box;
-  touch-action: none;
+  touch-action: manipulation;
 }
 
 h2{
