@@ -449,6 +449,10 @@ position: relative;
   border-radius: 5px;
 }
 
+#select:hover{
+  cursor: pointer;
+}
+
 .dots-grid{
   display: flex;
   flex-direction: row;
@@ -520,6 +524,31 @@ position: relative;
   font-family: 'Comfortaa', cursive;
 }
 
+.select-wrapper{
+  height: inherit;
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.home-div{
+  width: inherit;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#home-button{
+  width: 80px;
+  border: 5px dashed yellow;
+  padding: 0.5rem;
+
+}
 
 .start-wrapper{
   display: grid;

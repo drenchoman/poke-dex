@@ -13,6 +13,7 @@ let topArrow = document.getElementById('direction-top')
 let rightArrow = document.getElementById('direction-right')
 let leftArrow = document.getElementById('direction-left')
 let startButton = document.getElementById('start')
+let selectButton = document.getElementById('select')
 
 const dataRequests = (() => {
   const getPokemon = async () => {
@@ -156,6 +157,23 @@ const dom = (() => {
     listeners.addStartScreenListener()
   }
 
+  const addSelectScreen = () => {
+    app.textContent = ''
+    let div = dom.createDiv(
+      'select-wrapper',
+      'Is this Goodbye?',
+      'select-header'
+    )
+    let homeWrapper = createDiv('home-div')
+    let home = createImage('./assets/home.svg', 'home-button')
+    homeWrapper.appendChild(home)
+    div.appendChild(homeWrapper)
+    app.appendChild(div)
+    listeners.removeHomeListener()
+    listeners.removePokemonListener()
+    listeners.addSelectScreenListener()
+  }
+
   const addPokemon = (pokemons) => {
     app.textContent = ''
     let header = dom.createDiv(
@@ -237,12 +255,14 @@ const dom = (() => {
     utilities.resetBox(pokemonIndex)
     listeners.removePokemonListener()
     listeners.removeStartScreenListener()
+    listeners.removeSelectScreenListener()
     listeners.addHomeListener()
   }
 
   return {
     addIndividualPokemonCard,
     addStartScreen,
+    addSelectScreen,
     addPokemon,
     addCard,
     createImage,
@@ -393,6 +413,10 @@ const utilities = (() => {
     return string.charAt(0).toUpperCase() + string.slice(1)
   }
 
+  const sendToHomePage = () => {
+    location.href = '../'
+  }
+
   return {
     updateTheme,
     changeTheme,
@@ -406,12 +430,14 @@ const utilities = (() => {
     getValueAndCallPokemon,
     updatePokemon,
     capitaliseString,
+    sendToHomePage,
   }
 })()
 
 const listeners = (() => {
   const addStartListener = () => {
     startButton.addEventListener('click', dom.addStartScreen)
+    selectButton.addEventListener('click', dom.addSelectScreen)
   }
 
   const addHomeListener = () => {
@@ -479,11 +505,23 @@ const listeners = (() => {
   const removePokemonListener = () => {
     let right = document.getElementById('direction-right')
     rightClone = right.cloneNode(true)
-    right.parentNode.replaceChild(elClone, right)
+    right.parentNode.replaceChild(rightClone, right)
 
     let left = document.getElementById('direction-left')
     leftClone = left.cloneNode(true)
     left.parentNode.replaceChild(leftClone, left)
+  }
+
+  const addSelectScreenListener = () => {
+    document
+      .getElementById('aSelect')
+      .addEventListener('click', utilities.sendToHomePage)
+  }
+
+  const removeSelectScreenListener = () => {
+    document
+      .getElementById('aSelect')
+      .removeEventListener('click', utilities.sendToHomePage)
   }
 
   const addStartScreenListener = () => {
@@ -538,7 +576,9 @@ const listeners = (() => {
     removePokemonListener,
     addStartListener,
     addStartScreenListener,
+    addSelectScreenListener,
     removeStartScreenListener,
+    removeSelectScreenListener,
   }
 })()
 
