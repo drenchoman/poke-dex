@@ -5,6 +5,8 @@
 ## Goal
 I created this project to practice my CSS and API calling. I wanted the user to be able to view information about the original 150 pokemon including their abilities, height, weight and shiny versions.
 
+## [live demo](https://drenchoman.github.io/poke-dex/)
+
 ## Learnings
 More familiarity with CSS and how it works. I created the gameboy using CSS and it was fun being able to create the option to customise the colour of the gameboy.
 Better understanding of how API calls work and how data can be accessed from the response.
